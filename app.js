@@ -18,8 +18,10 @@ app.use(morgan(':method :url :status :param[id] - :response-time ms :body'));
 
 
 const entriesRoutes = require("./routes/entries.routes")
+const authorRoutes = require("./routes/authors.routes.js")
 
 app.use("/api/entries", entriesRoutes);
+app.use("/api/authors", authorRoutes)
 
 
 

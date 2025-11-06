@@ -1,4 +1,3 @@
-const { updateEntry } = require("../models/entries.model");
 
 const queries = {
         getAllEntries: `SELECT 
@@ -18,9 +17,17 @@ JOIN authors a ON e.id_author = a.id_author;`,
 FROM entries e
 JOIN authors a ON e.id_author = a.id_author
 WHERE a.email = $1;`,
-      updateEntry: `UPDATE entries
-SET content = $1, category = $2, date = $3
-WHERE title = $4;`
+      updateEntry: `
+       UPDATE entries
+  SET title = $1,
+      content = $2,
+      category = $3
+  WHERE title = $4
+  RETURNING *;
+`, 
+      deleteEntry: `
+DELETE FROM entries WHERE title = $1
+`
 
     
 }

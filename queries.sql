@@ -86,18 +86,20 @@ SELECT
   a.name, a.surname, a.email AS email_author, a.image
 FROM entries e
 JOIN authors a ON e.id_author = a.id_author
-WHERE a.email = $1;
+WHERE a.email = "alejandru@thebridgeschool.es";
 
 ---3.Modifica una entry por completo con nuevos datos y retorna un status 200. Buscar por título para editar entry.
 
 UPDATE entries
-SET content = $1, category = $2, date = $3
-WHERE title = $4;
+SET title = "Noticia: Un panda suelto por la ciudad", 
+content = "El panda se comió todas las frutas de una tienda", 
+category = "Sucesos"
+WHERE title = "Noticia: Un panda suelto por la ciudad";
 
 
 ---4.Borra una entry y retorna un status 200. Búsqueda por título de entry para borrar. 
 
-DELETE FROM entries WHERE title = $1;
+DELETE FROM entries WHERE title = "Titulo nuevo";
 
 
 ---5.Retorna un objeto con los datos de todos los autores. Retorna un status 200.
@@ -107,26 +109,26 @@ SELECT * FROM authors;
 
 ---6.[GET] http://localhost:3000/api/authors?email=alejandru@thebridgeschool.es Retorna un objeto con los datos del autor buscado. Retorna un status 200 Payload:
 
-SELECT * FROM authors WHERE email = $1;
+SELECT * FROM authors WHERE email = "alejandru@thebridgeschool.es";
 
 
 ---7.[POST] http://localhost:3000/api/authors/ Se envía por POST los datos del autor a crear y retorna un status 201. Payload:
 
 INSERT INTO authors (name, surname, email, image)
-VALUES ($1, $2, $3, $4);
+VALUES ("Arturik", "Melik", "ana.torres@example.com", "https://cdn.example.com/images/ana.jpg");
 
 
 
 ---8. [PUT] http://localhost:3000/api/authors/ Actualiza los datos de un autor y retorna un status 200. Payload:
 
 UPDATE authors
-SET name = $1, surname = $2, image = $3
-WHERE email = $4;
+SET name = "Annnnna", surname = "Petrosich", image = "https://cdn.example.com/images/ana.jpg"
+WHERE email = "artur.torres@example.com";
 
 
 ---9. [DELETE] http://localhost:3000/api/authors/ Borra un autor y retorna un status 200. Búsqueda por email. Payload:
 
-DELETE FROM authors WHERE email = $1;
+DELETE FROM authors WHERE email = "artur.torres@example.com";
 
 
 

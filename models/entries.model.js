@@ -84,6 +84,22 @@ const updateEntry = async (entry) => {
     return result;
 };
 
+// DELETE
+const deleteEntry = async (title) => {
+    let client, result;
+    try {
+        client = await pool.connect();
+        const data = await client.query(queries.deleteEntry, [title]);
+        result = data.rowCount; // número de filas eliminadas
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result;
+};
+
 
 
 // DELETE
@@ -93,9 +109,9 @@ const entries = {
     getEntriesByEmail,
     getAllEntries,
     createEntry,
-    updateEntry
-    //deleteEntry
-    //updateEntry
+    updateEntry,
+    deleteEntry
+    
 }
 
 module.exports = entries;
